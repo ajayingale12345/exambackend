@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  angular-app:
+    build:
+      context: ./exam
+      dockerfile: Dockerfile
+    container_name: angular_app
+    ports:
+      - "4200:4200"  # Assuming Angular app is served on port 80 inside the container
+    networks:
+      - app-network
+
+  springboot-app:
+    build:
+      context: ./exambackend
+      dockerfile: Dockerfile
+    container_name: springboot_app
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
